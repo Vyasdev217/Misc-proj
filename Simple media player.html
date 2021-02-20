@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SIMPLE MEDIA PLAYER</title>
+	
+	<style type="text/css">
+
+ /* The Modal (background) */
+ .modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; 
+}
+
+	</style>
+
+</head>
+
+<body style="background-color:#CCCCCC;overflow-x: hidden;font-family:Times new roman;">
+	 <div id="myModal" class="modal">
+ 
+		<div class="modal-content">
+		  <p>LOADING...</p>
+		</div>
+	  
+	  </div>
+	  
+	 <script type="text/javascript">
+		 var modal = document.getElementById("myModal");
+		 modal.style.display = "block";
+	 </script>
+	 
+		MEDIA PLAYER
+		<br>
+
+	<video id="videoPlayer" style="width:80%" controls preload="auto" style="float:left;">
+		<source src="" type="video/mp4">
+		<source src="" type="video/ogg">
+	Your browser does not support the video tag.
+	</video>
+	
+	<div id="side_panel" style="float:right;width: 20%;">
+		<div id="controls">
+			<label id="currentVideo"></label>
+			<br>
+			File<input id="input" type="file"></input>
+			<br>
+			Folder<input id="folder" type="file" webkitdirectory directory></input>
+			<br>
+			PlaybackSpeed:<nobr id="controls1"></nobr>
+		</div>
+		<button id="prevBtn" onclick="previousVideo()" style="background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;outline:none;font-size:20px;">Prev</button>
+		<button id="playBtn" onclick="playPauseVideo()" style="background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;outline:none;font-size:20px;">Loading</button>
+		<button id="nextBtn" onclick="nextVideo()" style="background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;outline:none;font-size:20px;">Next</button>
+		<div id="play_list">
+			<ul id="videoList">
+			</ul>
+		</div>
+	</div>
+
+
+</body>
+
+<script type="text/javascript">
+
+document.getElementById("prevBtn").innerHTML="<<";
+document.getElementById("nextBtn").innerHTML=">>";
+document.getElementById("playBtn").innerHTML="==(||)==";
+var minusbtn = document.createElement("BUTTON");
+var Minusbtn = document.createElement("BUTTON");
+var pbs = document.createElement("INPUT");
+var Plusbtn = document.createElement("BUTTON");
+var plusbtn = document.createElement("BUTTON");
+
+pbs.type="number";
+pbs.style="background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;outline:none;-moz-appearance: textfield;color:black;font-size:20px;";
+pbs.step=0.1;
+pbs.min=0;
+
+minusbtn.style="background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;outline:none;color:green;width:23%;font-size:20px;";
+Minusbtn.style="background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;outline:none;color:green;width:23%;font-size:17px;";
+Plusbtn.style="background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;outline:none;color:green;width:23%;font-size:17px;";
+plusbtn.style="background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;outline:none;color:green;width:23%;font-size:20px;";
+minusbtn.innerHTML = "-0.5";
+Minusbtn.innerHTML = "-0.1";
+pbs.value=1.0;
+Plusbtn.innerHTML = "+0.1";
+plusbtn.innerHTML = "+0.5";
+
+document.getElementById("controls1").appendChild(pbs);
+document.getElementById("controls").insertAdjacentHTML("beforeend","<br>")
+document.getElementById("controls").appendChild(minusbtn);
+document.getElementById("controls").appendChild(Minusbtn);
+document.getElementById("controls").appendChild(Plusbtn);
+document.getElementById("controls").appendChild(plusbtn);
+
+var video=document.getElementById("videoPlayer");
+
+pbs.addEventListener("change",function(){if(pbs.value>0){video.playbackRate = pbs.value;}else{pbs.value=1;video.playbackRate = pbs.value;}});
+minusbtn.addEventListener("click",function(){
+	pbs.stepDown(5);
+	video.playbackRate = pbs.value;
+});
+
+plusbtn.addEventListener("click",function(){
+	pbs.stepUp(5);
+	video.playbackRate = pbs.value;
+});
+
+Minusbtn.addEventListener("click",function(){
+	pbs.stepDown(1);
+	video.playbackRate = pbs.value;
+});
+
+Plusbtn.addEventListener("click",function(){
+	pbs.stepUp(1);
+	video.playbackRate = pbs.value;
+});
+document.getElementById("play_list").style.visibility="hidden";
+var playlistMode=true;//bool
+
+//Individual mdde--START
+	var input = document.getElementById('input');
+	input.type = 'file';
+
+	//Play video
+	input.onchange = e => { 
+		var file = e.target.files[0];
+		var fileUrl = window.URL.createObjectURL(file);
+		video.src=fileUrl;
+		video.playbackRate = pbs.value;
+		video.play();
+		document.getElementById("currentVideo").innerHTML="";
+		playlistMode=false;
+		document.getElementById("play_list").style.visibility="hidden";
+	}
+	input.click();
+//Individual mode--END
+
+//Playlist mode--START
+	//define var
+	var folder = document.getElementById('folder');
+	var currentVid=0;
+	var autoplay=true;//bool
+
+	//Play video in the play list
+	function playListItem(FileNum){
+		var fileUrl = window.URL.createObjectURL(files[FileNum]);
+		video.src=fileUrl;
+		video.playbackRate = pbs.value;
+		video.play();
+		var uat1=currentVid+1
+		document.getElementById("currentVideo").innerHTML=String("["+uat1+"] "+files[FileNum].name);
+	}
+
+	//Import playlist
+	var files = folder.files,len = files.length,li,i;
+	folder.onchange=function(){
+		var ul = document.getElementById("videoList");
+		while((ul.getElementsByTagName("li")).length > 0) {
+			ul.removeChild(ul.firstChild);
+		}
+
+		for(i=0;i<len;i+=1){
+			li = document.createElement("li");
+			li.appendChild(document.createTextNode("["+String(i+1)+"] "+files[i].name));
+			document.getElementById("videoList").appendChild(li);
+		}
+		playlistMode=true;
+		document.getElementById("play_list").style.visibility="visible";
+		currentVid=0;
+		playListItem(currentVid);
+	}
+
+
+	function nextVideo(){
+		if(playlistMode==false||currentVid==files.length-1)return 0;
+		currentVid+=1;
+		playListItem(currentVid);
+	}
+	function previousVideo(){
+		if(playlistMode==false||currentVid==0)return 0;
+		currentVid-=1;
+		playListItem(currentVid);
+	}
+
+	video.onended=function(){
+		if(playlistMode==true&&autoplay==true){
+			nextVideo();
+		}
+	}
+//Playlist mode--END
+function playPauseVideo(){
+	if(video.paused){
+		video.play();
+	}
+	else{
+		video.pause();
+	}
+}
+video.onpause=function(){document.getElementById("playBtn").innerHTML="==(||)==";}
+video.onplay=function(){document.getElementById("playBtn").innerHTML="==(=)==";}
+
+//close the LOADING modal
+modal.style.display = "none";
+
+</script>
+
+</html>
