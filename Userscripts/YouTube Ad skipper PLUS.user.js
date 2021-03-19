@@ -2,7 +2,7 @@
 // @name         YouTube Ad skipper PLUS
 // @name:ja      youtube自動広告スキップ+
 // @namespace    https://www.youtube.com/
-// @version      1.0.0
+// @version      1.0.1
 // @description  Auto ad skipper with some additional function for youtube
 // @description:ja youtubeの広告の自動スキップとおまけ機能
 // @author       WildLion
@@ -22,8 +22,11 @@ var pbs = document.createElement("INPUT");
 var Plusbtn = document.createElement("BUTTON");
 var plusbtn = document.createElement("BUTTON");
 
+var speedDiv = document.createElement("DIV");
+
+
 pbs.type="number";
-pbs.style="background-color: black;color: white;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;outline:none;-moz-appearance: textfield;text-align: center;font-size:25px;width:8%";
+pbs.style="background-color: black;color: white;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;outline:none;/*-moz-appearance: textfield;*/text-align: center;font-size:25px;width:8%;/*pointer-events: none;*/";
 pbs.step=0.1;
 pbs.min=0;
 
@@ -37,11 +40,11 @@ pbs.value=1.0;
 Plusbtn.innerHTML = "+0.1";
 plusbtn.innerHTML = "+0.5";
 
-document.getElementById("center").appendChild(minusbtn);
-document.getElementById("center").appendChild(Minusbtn);
+speedDiv.appendChild(minusbtn);
+speedDiv.appendChild(Minusbtn);
 document.getElementById("center").appendChild(pbs);
-document.getElementById("center").appendChild(Plusbtn);
-document.getElementById("center").appendChild(plusbtn);
+speedDiv.appendChild(Plusbtn);
+speedDiv.appendChild(plusbtn);
 
 pbs.addEventListener("change",function(){if(pbs.value>0){document.getElementsByTagName("video")[0].playbackRate = pbs.value;}else{pbs.value=1;document.getElementsByTagName("video")[0].playbackRate = pbs.value;}});
 
@@ -65,7 +68,8 @@ Plusbtn.addEventListener("click",function(){
 	document.getElementsByTagName("video")[0].playbackRate = pbs.value;
 });
 
-
+//Ad skipper on/off button
+document.getElementById('adskipperbtn').style.display='none';
 document.getElementById('adskipperbtn').addEventListener('mouseover', function () {
   document.getElementById('adskipperbtn').innerText = (enabled) ? 'Click to disable' : 'Click to enable';
 });
@@ -83,6 +87,7 @@ document.getElementById('adskipperbtn').style.fontSize='large';
 document.getElementById('adskipperbtn').style.background='#111111';
 document.getElementById('adskipperbtn').style.color='white';
 
+//Ad skipper and speed setter
 const observer = new MutationObserver((mutations) => {
   mutations.forEach((mutation) => {
     if (enabled) {
