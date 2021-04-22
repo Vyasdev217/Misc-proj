@@ -11,7 +11,3 @@ Install from [OpenUserJS](https://openuserjs.org/scripts/WildLion/Auto_ad_skippe
 **YouTube Ad skipper PLUS**
 
 Install from [OpenUserJS](https://openuserjs.org/scripts/WildLion/YouTube_Ad_skipper_PLUS) | [**GreasyFork**](https://greasyfork.org/scripts/421522-youtube-ad-skipper-plus) | [**GitHub**](https://github.com/Vyasdev217/Misc-proj/raw/main/Userscripts/YouTube%20Ad%20skipper%20PLUS.user.js)
-
-## Python practice
-
-**class Cars** : Practice for using python 'class'
