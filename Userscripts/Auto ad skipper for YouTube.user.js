@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         Auto ad skipper for YouTube
 // @name:ja      youtube自動広告スキップ
-// @namespace    https://www.youtube.com/
-// @version      1.1.5.1
+// @namespace    https://greasyfork.org/users/732692-wildlion
+// @version      1.1.6
 // @description  This addon skips youtube ad automatically (This is not an ad blocker)
 // @description:ja youtubeの広告を自動的にスキップします
 // @author       WildLion
