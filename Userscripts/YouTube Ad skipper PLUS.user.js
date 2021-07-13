@@ -2,14 +2,14 @@
 // @name         YouTube Ad skipper PLUS
 // @name:ja      youtube自動広告スキップ+
 // @namespace    https://greasyfork.org/users/732692-wildlion
-// @version      1.2.0
+// @version      1.2.1
 // @description  Auto ad skipper with some additional function for youtube
 // @description:ja youtubeの広告の自動スキップとおまけ機能
 // @author       WildLion
 // @match        https://www.youtube.com/*
 // @grant        none
 // @license      MIT
-// @downloadURL https://github.com/Vyasdev217/Misc-proj/raw/main/Userscripts/YouTube%20Ad%20skipper%20PLUS.user.js
+// @downloadURL https://greasyfork.org/scripts/421522-youtube-ad-skipper-plus/code/YouTube%20Ad%20skipper%20PLUS.user.js
 // @updateURL https://greasyfork.org/scripts/421522-youtube-ad-skipper-plus/code/YouTube%20Ad%20skipper%20PLUS.user.js
 // ==/UserScript==
 
